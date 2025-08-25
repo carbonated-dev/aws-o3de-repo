@@ -137,6 +137,8 @@ if(PAL_TRAIT_BUILD_HOST_TOOLS)
             PUBLIC
                 AZ::AzToolsFramework
                 ${gem_name}.Private.Object
+            PRIVATE
+                3rdParty::AWSNativeSDK::AWSCore  # CARBONATED we need preprocessor definitions from the package to be on par with AWSNativeSDKInit.Private.Object
     )
 
     ly_add_target(

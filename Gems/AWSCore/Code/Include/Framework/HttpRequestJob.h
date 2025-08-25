@@ -183,8 +183,11 @@ namespace AWSCore
         {
             AZ_UNUSED(response);
         };
-
+#if defined(CARBONATED)
+    public:  // used in LYHTTPInterface
+#else
     private:
+#endif
         /// Runs the HTTP request on the Job's thread.
         void Process() override;
 
