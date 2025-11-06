@@ -63,6 +63,14 @@ namespace AWSNativeSDKInit
         void Log(Aws::Utils::Logging::LogLevel logLevel, const char* tag, const char* formatStr, ...);
 #endif
 
+#if defined(CARBONATED) && defined(AZ_PLATFORM_IOS)  // newer iOS AWS SDK package with extra function
+#if defined(PLATFORM_SUPPORTS_AWS_NATIVE_SDK)
+        void vaLog(Aws::Utils::Logging::LogLevel logLevel, const char* tag, const char* formatStr, va_list args) override;
+#else
+        void vaLog(Aws::Utils::Logging::LogLevel logLevel, const char* tag, const char* formatStr, va_list args);
+#endif
+#endif
+        
         /**
         * Writes the stream to the output stream.
         */

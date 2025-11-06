@@ -79,6 +79,24 @@ namespace AWSNativeSDKInit
 
     }
 
+#if defined(CARBONATED) && defined(AZ_PLATFORM_IOS)  // newer iOS AWS SDK package with extra function
+    void AWSLogSystemInterface::vaLog(Aws::Utils::Logging::LogLevel logLevel, const char* tag, const char* formatStr, va_list args)
+    {
+        
+        if (!ShouldLog(logLevel))
+        {
+            return;
+        }
+        
+        char message[MAX_MESSAGE_LENGTH];
+        
+        azvsnprintf(message, MAX_MESSAGE_LENGTH, formatStr, args);
+        
+        ForwardAwsApiLogMessage(logLevel, tag, message);
+        
+    }
+#endif
+
     /**
     * Writes the stream to the output stream.
     */
